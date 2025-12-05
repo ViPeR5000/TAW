@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+    <style>
+        /* 1. Regra de Box-Sizing e Reset Universal */
+        *,
+        *::before,
+        *::after {
+            /* Inclui padding e border no cálculo de width e height */
+            box-sizing: border-box;
+            /* Remove margens e paddings padrão de todos os elementos */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 2. Estilos para o Corpo da Página (body) */
+        body {
+            /* Tamanho de fonte base para unidades rem */
+            font-size: 100%;
+            /* Fonte */
+            font-family: Arial, sans-serif;
+            /* Cor de fundo e texto */
+            background-color: #f8f8f8;
+            color: #333;
+            /* Altura da linha para o texto */
+            line-height: 1.6;
+        }
+
+        /* 3. Estilos para o Cabeçalho (header) */
+        header {
+            background-color: #000;
+            /* Padding vertical de 1.5em (top e bottom) */
+            padding: 1.5em 0;
+            /* Centraliza o conteúdo de texto */
+            text-align: center;
+        }
+
+        /* 4. Estilos para o Conteúdo Principal (main) */
+        main {
+            /* Padding de 1.5em em todos os lados */
+            padding: 1.5em;
+            /* Ativar Grid Layout */
+            display: grid;
+            /* Uma coluna para a primeira linha e duas colunas (com a mesma proporção) para a segunda (no layout base, será ajustado no Media Query) */
+            grid-template-rows: auto 1fr;
+            /* Espaçamento (gap) entre os itens do grid */
+            gap: 1.5em;
+        }
+
+        /* 5. Estilos para a Secção de Conteúdo (section) */
+        section {
+            background-color: #fff;
+            padding: 1em;
+            /* Borda sólida, fina e clara com cantos arredondados */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* 6. Estilos para o Rodapé (footer) */
+        footer {
+            background-color: #333;
+            color: #bbb;
+            text-align: center;
+            padding: 1em;
+        }
+
+        /* 7. Estilos para Títulos */
+
+        /* H1 */
+        h1 {
+            color: rgb(90, 195, 178);
+            /* Cor de destaque */
+            font-size: 2.5rem;
+            /* Tamanho grande com rem */
+            text-align: center;
+            margin-bottom: 0.5em;
+            /* Margem inferior */
+        }
+
+        /* H2, H3 */
+        h2,
+        h3 {
+            color: rgb(90, 195, 178);
+            /* Cor de destaque */
+            margin-bottom: 0.625em;
+        }
+
+        /* 8. Estilos para o Menu de Navegação */
+
+        /* Remover marcadores de lista e centralizar */
+        nav ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        /* Itens da lista lado a lado (linha-bloco) e margens horizontais */
+        nav ul li {
+            display: inline-block;
+            margin: 0 0.8em;
+        }
+
+        /* 9. Estilos para Links de Navegação */
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            /* Remover sublinhado */
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Efeito Hover */
+        nav a:hover {
+            color: rgb(90, 195, 178);
+            /* Mudar para cor de destaque */
+            text-decoration: underline;
+            /* Adicionar sublinhado */
+        }
+
+        /* 10. Estilos para Imagens e Vídeos */
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+            /* Centralizar e transformar em elemento de bloco */
+            display: block;
+            margin: 1em auto;
+        }
+
+        /* 11. Estilos para a Tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+        }
+
+        /* Células da Tabela */
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 0.5em;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        /* Imagens dentro da Tabela */
+        table img {
+            width: 3.5rem;
+            height: auto;
+            display: block;
+            /* Centraliza a imagem no meio da célula */
+            margin: 0 auto;
+        }
+
+        /* 12. Media Query (Mínimo 768px) */
+        @media (min-width: 768px) {
+
+            /* Main deve ter duas colunas com proporção igual */
+            main {
+                grid-template-columns: 1fr 1fr;
+                /* As secções deverão ocupar o espaço da primeira linha e da segunda linha, respetivamente, ou seja, lado a lado.
+                   A primeira secção ocupa a primeira coluna, a segunda secção ocupa a segunda coluna */
+                grid-template-rows: auto;
+            }
+
+            /* Forçar a segunda secção a ir para a segunda coluna (opcional, dependendo do conteúdo real, mas para este HTML funciona) */
+            main section:nth-child(2) {
+                grid-column: 2 / 3;
+                grid-row: 1 / 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Tecnologias de Aplicações Web</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">A minha conta</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    ---
+
+    <main>
+        <section>
+            <h2>Explorando o Desenvolvimento Web</h2>
+            <p>
+                O desenvolvimento de aplicações web modernas baseia-se na harmoniosa integração de três tecnologias
+                fundamentais: HTML para estruturar o conteúdo, CSS para estilizar e apresentar o visual, e JavaScript
+                para adicionar interatividade e comportamento dinâmico. Este projeto visa demonstrar a aplicação prática
+                destas tecnologias.
+            </p>
+
+            <h3>Vídeo de Apresentação</h3>
+            <video width="640" height="360" controls>
+                <source src="mp4/video.mp4" type="video/mp4">
+                O seu navegador não suporta a tag de vídeo.
+            </video>
+        </section>
+
+        <section>
+            <h3>Tabela de Recursos do Projeto</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Recurso</th>
+                        <th>Tipo de Ficheiro</th>
+                        <th>Utilização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="./img/logo_html.png" alt="Logo HTML" width="50"></td>
+                        <td>Hypertext Markup Language</td>
+                        <td>.html</td>
+                        <td>Permite descrever conteúdo de páginas web</td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/logo_css.png" alt="Logo CSS" width="50"></td>
+                        <td>Cascading Style Sheets</td>
+                        <td>.css</td>
+                        <td>Responsável pela apresentação e formatação dos elementos HTML</td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/logo_js.png" alt="Logo Javascript" width="50"></td>
+                        <td>Javascript</td>
+                        <td>.js</td>
+                        <td>Permite adicionar comportamento no cliente (browser)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    ---
+
+    <footer>
+        <p>© C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web. Desenvolvido por Grupo 2 /Carlos Pimentel
+            /Luís Moreira / Rui Melo</p>
+    </footer>
+
+</body>
+
+</html>
