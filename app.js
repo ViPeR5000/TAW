@@ -335,6 +335,7 @@ class Auth {
                     const requiredFields = {
                         'username': 'Username',
                         'psw': 'Password',
+                        'psw-repeat': 'Confirm Password',
                         'name': 'Name',
                         'email': 'Email',
                         'mobile': 'Mobile number',
@@ -348,6 +349,39 @@ class Auth {
                             errorMsg = `${requiredFields[fieldId]} é obrigatório.`;
                             isValid = false;
                             break;
+                        }
+                    }
+
+                    // Password match validation
+                    if (isValid) {
+                        const psw = form.psw.value;
+                        const pswRepeat = form['psw-repeat'].value;
+                        if (psw !== pswRepeat) {
+                            errorMsg = 'As passwords não coincidem.';
+                            isValid = false;
+                        }
+                    }
+
+                    // Password strength validation
+                    if (isValid) {
+                        const psw = form.psw.value;
+                        const hasLetter = /[a-zA-Z]/.test(psw);
+                        const hasNumber = /[0-9]/.test(psw);
+                        const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(psw);
+                        const minLength = psw.length >= 8;
+
+                        if (!minLength) {
+                            errorMsg = 'A password deve ter pelo menos 8 caracteres.';
+                            isValid = false;
+                        } else if (!hasLetter) {
+                            errorMsg = 'A password deve conter pelo menos uma letra.';
+                            isValid = false;
+                        } else if (!hasNumber) {
+                            errorMsg = 'A password deve conter pelo menos um número.';
+                            isValid = false;
+                        } else if (!hasSymbol) {
+                            errorMsg = 'A password deve conter pelo menos um símbolo (!@#$%^&*...).';
+                            isValid = false;
                         }
                     }
 
