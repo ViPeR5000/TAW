@@ -329,22 +329,68 @@ class Auth {
 
                 const validateRegister = () => {
                     let isValid = true;
-                    inputs.forEach(i => {
-                        if (i.required && !i.value.trim()) isValid = false;
-                    });
+                    let errorMsg = '';
+
+                    // Check required fields
+                    const requiredFields = {
+                        'username': 'Username',
+                        'psw': 'Password',
+                        'name': 'Name',
+                        'email': 'Email',
+                        'mobile': 'Mobile number',
+                        'nif': 'NIF',
+                        'address': 'Address'
+                    };
+
+                    for (let fieldId in requiredFields) {
+                        const field = form[fieldId];
+                        if (field && field.required && !field.value.trim()) {
+                            errorMsg = `${requiredFields[fieldId]} é obrigatório.`;
+                            isValid = false;
+                            break;
+                        }
+                    }
 
                     // Specific Validations
-                    const nif = form.nif.value;
-                    // Use external library function if available, ensures 9 digits and checksum
-                    if (nif && typeof validaContribuinte === 'function' && !validaContribuinte(nif)) isValid = false;
-                    else if (nif && (nif.length !== 9 || isNaN(nif))) isValid = false; // Fallback
+                    if (isValid) {
+                        const email = form.email.value;
+                        if (email && !validateEmail(email)) {
+                            errorMsg = 'Email inválido. Por favor, insira um email válido.';
+                            isValid = false;
+                        }
+                    }
 
-                    const email = form.email.value;
-                    if (email && !validateEmail(email)) isValid = false;
+                    if (isValid) {
+                        const nif = form.nif.value;
+                        if (nif) {
+                            if (typeof validaContribuinte === 'function') {
+                                if (!validaContribuinte(nif)) {
+                                    errorMsg = 'NIF inválido. Verifique o número de contribuinte.';
+                                    isValid = false;
+                                }
+                            } else if (nif.length !== 9 || isNaN(nif)) {
+                                errorMsg = 'NIF deve ter 9 dígitos numéricos.';
+                                isValid = false;
+                            }
+                        }
+                    }
+
+                    if (isValid) {
+                        const mobile = form.mobile.value;
+                        if (mobile && (mobile.length < 9 || isNaN(mobile))) {
+                            errorMsg = 'Número de telemóvel inválido.';
+                            isValid = false;
+                        }
+                    }
 
                     btn.disabled = !isValid;
-                    if (isValid) btn.style.opacity = '1';
-                    else btn.style.opacity = '0.5';
+                    if (isValid) {
+                        btn.style.opacity = '1';
+                        hideError();
+                    } else {
+                        btn.style.opacity = '0.5';
+                        if (errorMsg) showError(errorMsg);
+                    }
                 };
 
                 // Initial check
