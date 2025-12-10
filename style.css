@@ -1,7 +1,9 @@
 /* 1. Regra de Box-Sizing e Reset Universal */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     /* Inclui padding e border no cálculo de width e height */
-    box-sizing: border-box; 
+    box-sizing: border-box;
     /* Remove margens e paddings padrão de todos os elementos */
     margin: 0;
     padding: 0;
@@ -10,12 +12,12 @@
 /* 2. Estilos para o Corpo da Página (body) */
 body {
     /* Tamanho de fonte base para unidades rem */
-    font-size: 100%; 
+    font-size: 100%;
     /* Fonte */
     font-family: Arial, sans-serif;
     /* Cor de fundo e texto */
-    background-color: #f8f8f8; 
-    color: #333; 
+    background-color: #f8f8f8;
+    color: #333;
     /* Altura da linha para o texto */
     line-height: 1.6;
 }
@@ -24,7 +26,7 @@ body {
 header {
     background-color: #000;
     /* Padding vertical de 1.5em (top e bottom) */
-    padding: 1.5em 0; 
+    padding: 1.5em 0;
     /* Centraliza o conteúdo de texto */
     text-align: center;
 }
@@ -36,9 +38,9 @@ main {
     /* Ativar Grid Layout */
     display: grid;
     /* Uma coluna para a primeira linha e duas colunas (com a mesma proporção) para a segunda (no layout base, será ajustado no Media Query) */
-    grid-template-rows: auto 1fr; 
+    grid-template-rows: auto 1fr;
     /* Espaçamento (gap) entre os itens do grid */
-    gap: 1.5em; 
+    gap: 1.5em;
 }
 
 /* 5. Estilos para a Secção de Conteúdo (section) */
@@ -62,15 +64,20 @@ footer {
 
 /* H1 */
 h1 {
-    color: rgb(90, 195, 178); /* Cor de destaque */
-    font-size: 2.5rem; /* Tamanho grande com rem */
+    color: rgb(90, 195, 178);
+    /* Cor de destaque */
+    font-size: 2.5rem;
+    /* Tamanho grande com rem */
     text-align: center;
-    margin-bottom: 0.5em; /* Margem inferior */
+    margin-bottom: 0.5em;
+    /* Margem inferior */
 }
 
 /* H2, H3 */
-h2, h3 {
-    color: rgb(90, 195, 178); /* Cor de destaque */
+h2,
+h3 {
+    color: rgb(90, 195, 178);
+    /* Cor de destaque */
     margin-bottom: 0.625em;
 }
 
@@ -78,7 +85,7 @@ h2, h3 {
 
 /* Remover marcadores de lista e centralizar */
 nav ul {
-    list-style: none; 
+    list-style: none;
     text-align: center;
 }
 
@@ -91,19 +98,23 @@ nav ul li {
 /* 9. Estilos para Links de Navegação */
 nav a {
     color: #fff;
-    text-decoration: none; /* Remover sublinhado */
+    text-decoration: none;
+    /* Remover sublinhado */
     font-weight: bold;
     font-size: 1.1rem;
 }
 
 /* Efeito Hover */
 nav a:hover {
-    color: rgb(90, 195, 178); /* Mudar para cor de destaque */
-    text-decoration: underline; /* Adicionar sublinhado */
+    color: rgb(90, 195, 178);
+    /* Mudar para cor de destaque */
+    text-decoration: underline;
+    /* Adicionar sublinhado */
 }
 
 /* 10. Estilos para Imagens e Vídeos */
-img, video {
+img,
+video {
     max-width: 100%;
     height: auto;
     /* Centralizar e transformar em elemento de bloco */
@@ -119,7 +130,8 @@ table {
 }
 
 /* Células da Tabela */
-table th, table td {
+table th,
+table td {
     border: 1px solid #ddd;
     padding: 0.5em;
     text-align: left;
@@ -137,6 +149,7 @@ table img {
 
 /* 12. Media Query (Mínimo 768px) */
 @media (min-width: 768px) {
+
     /* Main deve ter duas colunas com proporção igual */
     main {
         grid-template-columns: 1fr 1fr;
@@ -151,56 +164,61 @@ table img {
         grid-row: 1 / 2;
     }
 }
+
 /* 13. Estilos para Botões */
-input[type=button], input[type=submit], input[type=reset] {
-  background-color: #04AA6D;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
+input[type=button],
+input[type=submit],
+input[type=reset] {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
 }
+
 /* Bordered form */
 form {
-  border: 3px solid #f1f1f1;
+    border: 3px solid #f1f1f1;
 }
 
 /* Full-width inputs */
-input[type=text], [type=number], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+input[type=text],
+[type=number],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
 
 /* Add a hover effect for buttons */
 button:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
 
 /* Extra style for the cancel button (red) */
 .cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
 }
 
 /* Add padding to containers */
 .container {
-  padding: 60px;
+    padding: 60px;
 }
-
