@@ -229,6 +229,33 @@ class Auth {
                 this.loadAdminUsers();
             };
         }
+
+        // Bind Clear Storage Event
+        const clearStorageBtn = document.getElementById('clear-storage-btn');
+        if (clearStorageBtn) {
+            clearStorageBtn.onclick = () => {
+                const confirmMsg = 'ATENÇÃO: Esta ação irá apagar TODOS os dados do sistema!\n\n' +
+                    '- Todos os utilizadores registados\n' +
+                    '- Todas as sessões ativas\n' +
+                    '- Todos os dados armazenados\n\n' +
+                    'Esta ação é IRREVERSÍVEL!\n\n' +
+                    'Tem a certeza que deseja continuar?';
+
+                if (!confirm(confirmMsg)) return;
+
+                // Double confirmation
+                const finalConfirm = prompt('Digite "APAGAR TUDO" para confirmar:');
+                if (finalConfirm !== 'APAGAR TUDO') {
+                    alert('Operação cancelada.');
+                    return;
+                }
+
+                // Clear all localStorage
+                localStorage.clear();
+                alert('Todos os dados foram apagados com sucesso!\n\nSerá redirecionado para a página inicial.');
+                window.location.href = 'index.html';
+            };
+        }
     }
 
     loadProfile() {
