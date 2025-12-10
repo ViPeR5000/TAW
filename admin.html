@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Projeto de Tecnologias de Aplicações Web</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .admin-table th {
+            background-color: #f2f2f2;
+        }
+
+        .admin-actions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Administração</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- Nav will be updated by app.js -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Gestão de Utilizadores</h2>
+            <div id="admin-container">
+                <!-- Table will be injected here by JS -->
+                <p>A carregar utilizadores...</p>
+            </div>
+
+            <div class="admin-actions">
+                <button id="delete-selected-btn"
+                    style="background-color: #f44336; width: auto; padding: 10px 20px; display: none;">Apagar
+                    Selecionados</button>
+                <button id="promote-selected-btn"
+                    style="background-color: #4CAF50; width: auto; padding: 10px 20px; display: none; margin-left: 10px;">Promover
+                    a Admin</button>
+                <button id="demote-selected-btn"
+                    style="background-color: #ff9800; width: auto; padding: 10px 20px; display: none; margin-left: 10px;">Remover
+                    Admin</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web. Desenvolvido por Grupo 2 Luís Moreira
+            / Manuel Vieira / Rui Melo</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

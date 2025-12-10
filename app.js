@@ -13,6 +13,7 @@ class Auth {
     }
 
     init() {
+        // this.seedAdmin(); // Removed seeded admin
         this.checkAccess();
         this.updateUI();
         this.bindEvents();
@@ -23,6 +24,14 @@ class Auth {
     checkAccess() {
         const path = window.location.pathname;
         const isAuth = !!this.currentUser;
+
+        // Admin Protection
+        if (path.includes('admin.html')) {
+            if (!isAuth || this.currentUser.role !== 'admin') {
+                window.location.href = 'index.html'; // Kick out non-admins
+                return;
+            }
+        }
 
         // Redirect Logged In users away from Login/Register
         if (isAuth) {
@@ -44,6 +53,9 @@ class Auth {
         if (exists) {
             throw new Error('Username or Email already exists.');
         }
+
+        // Assign Role: First user is 'admin', others 'user'
+        userData.role = this.users.length === 0 ? 'admin' : 'user';
 
         this.users.push(userData);
         this.saveUsers();
@@ -84,11 +96,18 @@ class Auth {
         if (nav) {
             if (this.currentUser) {
                 // Logged In
-                nav.innerHTML = `
-                    <li><a href="index.html">Home</a></li>
+                let menuHtml = `<li><a href="index.html">Home</a></li>`;
+
+                if (this.currentUser.role === 'admin') {
+                    menuHtml += `<li><a href="admin.html">Administração</a></li>`;
+                }
+
+                menuHtml += `
                     <li><a href="profile.html">A minha conta</a></li>
                     <li><a href="#" id="logoutBtn">Logout (${this.currentUser.username})</a></li>
                 `;
+                nav.innerHTML = menuHtml;
+
                 // Add logout listener dynamically
                 const logoutBtn = document.getElementById('logoutBtn');
                 if (logoutBtn) {
@@ -110,6 +129,105 @@ class Auth {
         // Load Profile Data if on profile page
         if (this.currentUser && document.getElementById('profile-username')) {
             this.loadProfile();
+        }
+
+        // Load Admin Data if on admin page
+        if (this.currentUser && this.currentUser.role === 'admin' && document.getElementById('admin-container')) {
+            this.loadAdminUsers();
+        }
+    }
+
+    loadAdminUsers() {
+        const container = document.getElementById('admin-container');
+        const deleteBtn = document.getElementById('delete-selected-btn');
+        const promoteBtn = document.getElementById('promote-selected-btn');
+        const demoteBtn = document.getElementById('demote-selected-btn');
+
+        let html = `
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Selectionar</th>
+                        <th>Photo</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>NIF</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        if (this.users.length === 0) {
+            html += `<tr><td colspan="7">No users found.</td></tr>`;
+        } else {
+            this.users.forEach(user => {
+                const isMe = user.username === this.currentUser.username;
+                const photoHtml = user.photo ? `<img src="${user.photo}" style="width: 40px; height: 40px; border-radius: 50%;">` : 'No Photo';
+
+                html += `
+                    <tr>
+                        <td><input type="checkbox" class="user-select" value="${user.username}" ${isMe ? 'disabled' : ''}></td>
+                        <td>${photoHtml}</td>
+                        <td>${user.username}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.nif}</td>
+                        <td>${user.role || 'user'}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+        deleteBtn.style.display = 'inline-block';
+        if (promoteBtn) promoteBtn.style.display = 'inline-block';
+        if (demoteBtn) demoteBtn.style.display = 'inline-block';
+
+        const getSelectedUsers = () => {
+            const checkboxes = document.querySelectorAll('.user-select:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        };
+
+        // Bind Delete Event
+        deleteBtn.onclick = () => {
+            const usernames = getSelectedUsers();
+            if (usernames.length === 0) return alert('Select users first.');
+            if (!confirm(`Delete ${usernames.length} users?`)) return;
+
+            this.users = this.users.filter(u => !usernames.includes(u.username));
+            this.saveUsers();
+            this.loadAdminUsers();
+        };
+
+        // Bind Promote Event
+        if (promoteBtn) {
+            promoteBtn.onclick = () => {
+                const usernames = getSelectedUsers();
+                if (usernames.length === 0) return alert('Select users first.');
+
+                this.users.forEach(u => {
+                    if (usernames.includes(u.username)) u.role = 'admin';
+                });
+                this.saveUsers();
+                this.loadAdminUsers();
+            };
+        }
+
+        // Bind Demote Event
+        if (demoteBtn) {
+            demoteBtn.onclick = () => {
+                const usernames = getSelectedUsers();
+                if (usernames.length === 0) return alert('Select users first.');
+
+                this.users.forEach(u => {
+                    if (usernames.includes(u.username)) u.role = 'user';
+                });
+                this.saveUsers();
+                this.loadAdminUsers();
+            };
         }
     }
 
