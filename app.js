@@ -51,7 +51,7 @@ class Auth {
         // Verificar se username ou email já existe
         const exists = this.users.find(u => u.username === userData.username || u.email === userData.email);
         if (exists) {
-            throw new Error('Username or Email already exists.');
+            throw new Error('Utilizador ou Correio Eletrónico já existe.');
         }
 
         // Atribuir Role: Primeiro utilizador é 'admin', outros são 'user'
@@ -68,7 +68,7 @@ class Auth {
         );
 
         if (!user) {
-            throw new Error('Invalid credentials.');
+            throw new Error('Credenciais inválidas.');
         }
 
         this.currentUser = user;
@@ -146,13 +146,13 @@ class Auth {
             <table class="admin-table">
                 <thead>
                     <tr>
-                        <th>Selectionar</th>
-                        <th>Photo</th>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th>Selecioar</th>
+                        <th>Fotografia</th>
+                        <th>Utilizador</th>
+                        <th>Nome</th>
+                        <th>Correio Eletrónico</th>
                         <th>NIF</th>
-                        <th>Role</th>
+                        <th>Papel</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -50,6 +50,9 @@ section {
     /* Borda sólida, fina e clara com cantos arredondados */
     border: 1px solid #ccc;
     border-radius: 5px;
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
 }
 
 /* 6. Estilos para o Rodapé (footer) */
