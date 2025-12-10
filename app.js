@@ -13,11 +13,30 @@ class Auth {
     }
 
     init() {
+        this.checkAccess();
         this.updateUI();
         this.bindEvents();
     }
 
     /* --- Core --- */
+
+    checkAccess() {
+        const path = window.location.pathname;
+        const isAuth = !!this.currentUser;
+
+        // Redirect Logged In users away from Login/Register
+        if (isAuth) {
+            if (path.includes('login.html') || path.includes('register.html')) {
+                window.location.href = 'profile.html';
+            }
+        }
+        // Redirect Logged Out users away from Profile
+        else {
+            if (path.includes('profile.html')) {
+                window.location.href = 'login.html';
+            }
+        }
+    }
 
     register(userData) {
         // Check if username or email already exists
@@ -43,7 +62,7 @@ class Auth {
         this.currentUser = user;
         localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(user));
         this.updateUI();
-        window.location.href = 'index.html';
+        window.location.href = 'profile.html';
     }
 
     logout() {
