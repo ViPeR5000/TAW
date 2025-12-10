@@ -1,5 +1,5 @@
 /**
- * Logic for Registration, Login, and Session Management
+ * Lógica para Registo, Login e Gestão de Sessões
  */
 
 const STORAGE_KEY_USERS = 'taw_users';
@@ -13,33 +13,33 @@ class Auth {
     }
 
     init() {
-        // this.seedAdmin(); // Removed seeded admin
+        // this.seedAdmin(); // Admin pré-definido removido
         this.checkAccess();
         this.updateUI();
         this.bindEvents();
     }
 
-    /* --- Core --- */
+    /* --- Funcionalidades Principais --- */
 
     checkAccess() {
         const path = window.location.pathname;
         const isAuth = !!this.currentUser;
 
-        // Admin Protection
+        // Proteção de Admin
         if (path.includes('admin.html')) {
             if (!isAuth || this.currentUser.role !== 'admin') {
-                window.location.href = 'index.html'; // Kick out non-admins
+                window.location.href = 'index.html'; // Redirecionar não-admins
                 return;
             }
         }
 
-        // Redirect Logged In users away from Login/Register
+        // Redirecionar utilizadores autenticados das páginas de Login/Registo
         if (isAuth) {
             if (path.includes('login.html') || path.includes('register.html')) {
                 window.location.href = 'profile.html';
             }
         }
-        // Redirect Logged Out users away from Profile
+        // Redirecionar utilizadores não autenticados da página de Perfil
         else {
             if (path.includes('profile.html')) {
                 window.location.href = 'login.html';
@@ -48,18 +48,18 @@ class Auth {
     }
 
     register(userData) {
-        // Check if username or email already exists
+        // Verificar se username ou email já existe
         const exists = this.users.find(u => u.username === userData.username || u.email === userData.email);
         if (exists) {
             throw new Error('Username or Email already exists.');
         }
 
-        // Assign Role: First user is 'admin', others 'user'
+        // Atribuir Role: Primeiro utilizador é 'admin', outros são 'user'
         userData.role = this.users.length === 0 ? 'admin' : 'user';
 
         this.users.push(userData);
         this.saveUsers();
-        this.login(userData.username, userData.password); // Auto login after register
+        this.login(userData.username, userData.password); // Login automático após registo
     }
 
     login(usernameOrEmail, password) {
@@ -88,14 +88,14 @@ class Auth {
         localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(this.users));
     }
 
-    /* --- UI & Events --- */
+    /* --- Interface e Eventos --- */
 
     updateUI() {
-        // Update Navigation
+        // Atualizar Navegação
         const nav = document.querySelector('nav ul');
         if (nav) {
             if (this.currentUser) {
-                // Logged In
+                // Utilizador Autenticado
                 let menuHtml = `<li><a href="index.html">Home</a></li>`;
 
                 if (this.currentUser.role === 'admin') {
@@ -108,7 +108,7 @@ class Auth {
                 `;
                 nav.innerHTML = menuHtml;
 
-                // Add logout listener dynamically
+                // Adicionar listener de logout dinamicamente
                 const logoutBtn = document.getElementById('logoutBtn');
                 if (logoutBtn) {
                     logoutBtn.addEventListener('click', (e) => {
@@ -117,7 +117,7 @@ class Auth {
                     });
                 }
             } else {
-                // Logged Out
+                // Utilizador Não Autenticado
                 nav.innerHTML = `
                     <li><a href="index.html">Home</a></li>
                     <li><a href="login.html">Login</a></li>
@@ -126,12 +126,12 @@ class Auth {
             }
         }
 
-        // Load Profile Data if on profile page
+        // Carregar dados do perfil se estiver na página de perfil
         if (this.currentUser && document.getElementById('profile-username')) {
             this.loadProfile();
         }
 
-        // Load Admin Data if on admin page
+        // Carregar dados de admin se estiver na página de admin
         if (this.currentUser && this.currentUser.role === 'admin' && document.getElementById('admin-container')) {
             this.loadAdminUsers();
         }
@@ -191,7 +191,7 @@ class Auth {
             return Array.from(checkboxes).map(cb => cb.value);
         };
 
-        // Bind Delete Event
+        // Associar Evento de Eliminar
         deleteBtn.onclick = () => {
             const usernames = getSelectedUsers();
             if (usernames.length === 0) return alert('Select users first.');
@@ -202,7 +202,7 @@ class Auth {
             this.loadAdminUsers();
         };
 
-        // Bind Promote Event
+        // Associar Evento de Promover
         if (promoteBtn) {
             promoteBtn.onclick = () => {
                 const usernames = getSelectedUsers();
@@ -216,7 +216,7 @@ class Auth {
             };
         }
 
-        // Bind Demote Event
+        // Associar Evento de Despromover
         if (demoteBtn) {
             demoteBtn.onclick = () => {
                 const usernames = getSelectedUsers();
@@ -230,7 +230,7 @@ class Auth {
             };
         }
 
-        // Bind Clear Storage Event
+        // Associar Evento de Limpar Storage
         const clearStorageBtn = document.getElementById('clear-storage-btn');
         if (clearStorageBtn) {
             clearStorageBtn.onclick = () => {
@@ -243,14 +243,14 @@ class Auth {
 
                 if (!confirm(confirmMsg)) return;
 
-                // Double confirmation
+                // Confirmação dupla
                 const finalConfirm = prompt('Digite "APAGAR TUDO" para confirmar:');
                 if (finalConfirm !== 'APAGAR TUDO') {
                     alert('Operação cancelada.');
                     return;
                 }
 
-                // Clear all localStorage
+                // Limpar todo o localStorage
                 localStorage.clear();
                 alert('Todos os dados foram apagados com sucesso!\n\nSerá redirecionado para a página inicial.');
                 window.location.href = 'index.html';
@@ -283,7 +283,7 @@ class Auth {
             if (noPhotoEl) noPhotoEl.style.display = 'block';
         }
 
-        // Bind Edit Profile Events
+        // Associar Eventos de Edição de Perfil
         this.bindEditProfile();
     }
 
@@ -315,10 +315,10 @@ class Auth {
             );
         };
 
-        // Switch to Edit Mode
+        // Mudar para Modo de Edição
         editBtn.onclick = () => {
             hideError();
-            // Populate edit fields
+            // Preencher campos de edição
             document.getElementById('edit-name').value = this.currentUser.name;
             document.getElementById('edit-email').value = this.currentUser.email;
             document.getElementById('edit-mobile').value = this.currentUser.mobile;
@@ -329,14 +329,14 @@ class Auth {
             editMode.style.display = 'block';
         };
 
-        // Cancel Edit
+        // Cancelar Edição
         cancelBtn.onclick = () => {
             hideError();
             viewMode.style.display = 'block';
             editMode.style.display = 'none';
         };
 
-        // Save Changes
+        // Guardar Alterações
         saveBtn.onclick = () => {
             hideError();
 
@@ -347,7 +347,7 @@ class Auth {
             const newAddress = document.getElementById('edit-address').value.trim();
             const photoFile = document.getElementById('edit-photo').files[0];
 
-            // Validation
+            // Validação
             if (!newName || !newEmail || !newMobile || !newNif || !newAddress) {
                 showError('Todos os campos são obrigatórios.');
                 return;
@@ -371,7 +371,7 @@ class Auth {
                 return;
             }
 
-            // Update user data
+            // Atualizar dados do utilizador
             const updateUser = (photoBase64) => {
                 this.currentUser.name = newName;
                 this.currentUser.email = newEmail;
@@ -380,24 +380,24 @@ class Auth {
                 this.currentUser.address = newAddress;
                 if (photoBase64) this.currentUser.photo = photoBase64;
 
-                // Update in users array
+                // Atualizar no array de utilizadores
                 const userIndex = this.users.findIndex(u => u.username === this.currentUser.username);
                 if (userIndex !== -1) {
                     this.users[userIndex] = this.currentUser;
                     this.saveUsers();
                 }
 
-                // Update session
+                // Atualizar sessão
                 localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(this.currentUser));
 
-                // Refresh view
+                // Atualizar visualização
                 this.loadProfile();
                 viewMode.style.display = 'block';
                 editMode.style.display = 'none';
                 alert('Perfil atualizado com sucesso!');
             };
 
-            // Handle photo upload
+            // Processar upload de foto
             if (photoFile) {
                 const reader = new FileReader();
                 reader.onload = (e) => updateUser(e.target.result);
@@ -432,7 +432,7 @@ class Auth {
                 );
         };
 
-        // Login Handler
+        // Handler de Login
         if (window.location.pathname.includes('login.html')) {
             const form = document.querySelector('form');
             if (form) {
@@ -449,7 +449,7 @@ class Auth {
                     else btn.style.opacity = '0.5';
                 };
 
-                // Initial check
+                // Verificação inicial
                 validateLogin();
 
                 inputs.forEach(i => i.addEventListener('input', () => {
@@ -471,7 +471,7 @@ class Auth {
             }
         }
 
-        // Register Handler
+        // Handler de Registo
         if (window.location.pathname.includes('register.html')) {
             const form = document.querySelector('form');
             if (form) {
@@ -482,7 +482,7 @@ class Auth {
                     let isValid = true;
                     let errorMsg = '';
 
-                    // Check required fields
+                    // Verificar campos obrigatórios
                     const requiredFields = {
                         'username': 'Username',
                         'psw': 'Password',
@@ -503,7 +503,7 @@ class Auth {
                         }
                     }
 
-                    // Password match validation
+                    // Validação de correspondência de password
                     if (isValid) {
                         const psw = form.psw.value;
                         const pswRepeat = form['psw-repeat'].value;
@@ -513,7 +513,7 @@ class Auth {
                         }
                     }
 
-                    // Password strength validation
+                    // Validação de força de password
                     if (isValid) {
                         const psw = form.psw.value;
                         const hasLetter = /[a-zA-Z]/.test(psw);
@@ -536,7 +536,7 @@ class Auth {
                         }
                     }
 
-                    // Specific Validations
+                    // Validações Específicas
                     if (isValid) {
                         const email = form.email.value;
                         if (email && !validateEmail(email)) {
@@ -578,7 +578,7 @@ class Auth {
                     }
                 };
 
-                // Initial check
+                // Verificação inicial
                 validateRegister();
 
                 inputs.forEach(i => i.addEventListener('input', () => {
@@ -589,7 +589,7 @@ class Auth {
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
 
-                    // Final Validation Check before processing
+                    // Verificação Final de Validação antes de processar
                     const nif = form.nif.value;
                     if (typeof validaContribuinte === 'function') {
                         if (!validaContribuinte(nif)) {
@@ -643,7 +643,7 @@ class Auth {
     }
 }
 
-// Initialize on load
+// Inicializar ao carregar
 document.addEventListener('DOMContentLoaded', () => {
     new Auth();
 });
