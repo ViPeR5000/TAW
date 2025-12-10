@@ -140,12 +140,54 @@ class Auth {
     }
 
     bindEvents() {
-        // Login Form
-        const loginForm = document.querySelector('form[action="login_handler"]'); // We will add this action or ID to the form to identify it
-        // Or better, identifying by context
+        const showError = (msg) => {
+            const errDiv = document.getElementById('error-message');
+            if (errDiv) {
+                errDiv.textContent = msg;
+                errDiv.style.display = 'block';
+            }
+        };
+
+        const hideError = () => {
+            const errDiv = document.getElementById('error-message');
+            if (errDiv) {
+                errDiv.style.display = 'none';
+            }
+        };
+
+        const validateEmail = (email) => {
+            return String(email)
+                .toLowerCase()
+                .match(
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+        };
+
+        // Login Handler
         if (window.location.pathname.includes('login.html')) {
             const form = document.querySelector('form');
             if (form) {
+                const btn = form.querySelector('button');
+                const inputs = form.querySelectorAll('input');
+
+                const validateLogin = () => {
+                    let isValid = true;
+                    inputs.forEach(i => {
+                        if (i.required && !i.value.trim()) isValid = false;
+                    });
+                    btn.disabled = !isValid;
+                    if (isValid) btn.style.opacity = '1';
+                    else btn.style.opacity = '0.5';
+                };
+
+                // Initial check
+                validateLogin();
+
+                inputs.forEach(i => i.addEventListener('input', () => {
+                    hideError();
+                    validateLogin();
+                }));
+
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const username = form.username.value;
@@ -154,32 +196,69 @@ class Auth {
                     try {
                         this.login(username, password);
                     } catch (error) {
-                        alert(error.message);
+                        showError(error.message);
                     }
                 });
             }
         }
 
-        // Register Form
+        // Register Handler
         if (window.location.pathname.includes('register.html')) {
             const form = document.querySelector('form');
             if (form) {
+                const btn = form.querySelector('.registerbtn');
+                const inputs = form.querySelectorAll('input');
+
+                const validateRegister = () => {
+                    let isValid = true;
+                    inputs.forEach(i => {
+                        if (i.required && !i.value.trim()) isValid = false;
+                    });
+
+                    // Specific Validations
+                    const nif = form.nif.value;
+                    // Use external library function if available, ensures 9 digits and checksum
+                    if (nif && typeof validaContribuinte === 'function' && !validaContribuinte(nif)) isValid = false;
+                    else if (nif && (nif.length !== 9 || isNaN(nif))) isValid = false; // Fallback
+
+                    const email = form.email.value;
+                    if (email && !validateEmail(email)) isValid = false;
+
+                    btn.disabled = !isValid;
+                    if (isValid) btn.style.opacity = '1';
+                    else btn.style.opacity = '0.5';
+                };
+
+                // Initial check
+                validateRegister();
+
+                inputs.forEach(i => i.addEventListener('input', () => {
+                    hideError();
+                    validateRegister();
+                }));
+
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
 
-                    // Simple Validation
+                    // Final Validation Check before processing
+                    const nif = form.nif.value;
+                    if (typeof validaContribuinte === 'function') {
+                        if (!validaContribuinte(nif)) {
+                            showError("Invalid NIF.");
+                            return;
+                        }
+                    } else if (nif.length !== 9) {
+                        showError("NIF must have 9 digits.");
+                        return;
+                    }
+
+                    if (!validateEmail(form.email.value)) {
+                        showError("Invalid Email.");
+                        return;
+                    }
+
                     const psw = form.psw.value;
-                    // In a real app we would have a repeat password field
-
-                    // Construct User Object
-                    /* 
-                       Data required: username/e-mail, nome, e-mail, fotografia, telemóvel, nif, morada 
-                       Form fields: username, psw, profilePhoto, name, email, mobile, nif, address
-                    */
-
-                    // Handle File Upload (Convert to Base64 for localStorage)
                     const fileInput = form.profilePhoto;
-                    let photoData = '';
 
                     const processRegister = (photoBase64) => {
                         const userData = {
@@ -196,7 +275,7 @@ class Auth {
                         try {
                             this.register(userData);
                         } catch (error) {
-                            alert(error.message);
+                            showError(error.message);
                         }
                     };
 
@@ -207,7 +286,7 @@ class Auth {
                         };
                         reader.readAsDataURL(fileInput.files[0]);
                     } else {
-                        processRegister(''); // No photo
+                        processRegister('');
                     }
                 });
             }
