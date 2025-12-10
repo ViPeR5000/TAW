@@ -96,7 +96,7 @@ class Auth {
         if (nav) {
             if (this.currentUser) {
                 // Utilizador Autenticado
-                let menuHtml = `<li><a href="index.html">Home</a></li>`;
+                let menuHtml = `<li><a href="index.html">Início</a></li>`;
 
                 if (this.currentUser.role === 'admin') {
                     menuHtml += `<li><a href="admin.html">Administração</a></li>`;
@@ -104,7 +104,7 @@ class Auth {
 
                 menuHtml += `
                     <li><a href="profile.html">A minha conta</a></li>
-                    <li><a href="#" id="logoutBtn">Logout (${this.currentUser.username})</a></li>
+                    <li><a href="#" id="logoutBtn">Sair (${this.currentUser.username})</a></li>
                 `;
                 nav.innerHTML = menuHtml;
 
@@ -119,9 +119,8 @@ class Auth {
             } else {
                 // Utilizador Não Autenticado
                 nav.innerHTML = `
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="login.html">Entrar</a></li>
                 `;
             }
         }
@@ -484,14 +483,14 @@ class Auth {
 
                     // Verificar campos obrigatórios
                     const requiredFields = {
-                        'username': 'Username',
-                        'psw': 'Password',
-                        'psw-repeat': 'Confirm Password',
-                        'name': 'Name',
-                        'email': 'Email',
-                        'mobile': 'Mobile number',
+                        'username': 'Utilizador',
+                        'psw': 'Senha',
+                        'psw-repeat': 'Confirmar Senha',
+                        'name': 'Nome',
+                        'email': 'Correio Eletrónico',
+                        'mobile': 'Telefone',
                         'nif': 'NIF',
-                        'address': 'Address'
+                        'address': 'Morada'
                     };
 
                     for (let fieldId in requiredFields) {
