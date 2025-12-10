@@ -282,6 +282,130 @@ class Auth {
             imgEl.style.display = 'none';
             if (noPhotoEl) noPhotoEl.style.display = 'block';
         }
+
+        // Bind Edit Profile Events
+        this.bindEditProfile();
+    }
+
+    bindEditProfile() {
+        const editBtn = document.getElementById('edit-profile-btn');
+        const saveBtn = document.getElementById('save-profile-btn');
+        const cancelBtn = document.getElementById('cancel-edit-btn');
+        const viewMode = document.getElementById('profile-view-mode');
+        const editMode = document.getElementById('profile-edit-mode');
+
+        if (!editBtn || !saveBtn || !cancelBtn) return;
+
+        const showError = (msg) => {
+            const errDiv = document.getElementById('edit-error-message');
+            if (errDiv) {
+                errDiv.textContent = msg;
+                errDiv.style.display = 'block';
+            }
+        };
+
+        const hideError = () => {
+            const errDiv = document.getElementById('edit-error-message');
+            if (errDiv) errDiv.style.display = 'none';
+        };
+
+        const validateEmail = (email) => {
+            return String(email).toLowerCase().match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
+        };
+
+        // Switch to Edit Mode
+        editBtn.onclick = () => {
+            hideError();
+            // Populate edit fields
+            document.getElementById('edit-name').value = this.currentUser.name;
+            document.getElementById('edit-email').value = this.currentUser.email;
+            document.getElementById('edit-mobile').value = this.currentUser.mobile;
+            document.getElementById('edit-nif').value = this.currentUser.nif;
+            document.getElementById('edit-address').value = this.currentUser.address;
+
+            viewMode.style.display = 'none';
+            editMode.style.display = 'block';
+        };
+
+        // Cancel Edit
+        cancelBtn.onclick = () => {
+            hideError();
+            viewMode.style.display = 'block';
+            editMode.style.display = 'none';
+        };
+
+        // Save Changes
+        saveBtn.onclick = () => {
+            hideError();
+
+            const newName = document.getElementById('edit-name').value.trim();
+            const newEmail = document.getElementById('edit-email').value.trim();
+            const newMobile = document.getElementById('edit-mobile').value.trim();
+            const newNif = document.getElementById('edit-nif').value.trim();
+            const newAddress = document.getElementById('edit-address').value.trim();
+            const photoFile = document.getElementById('edit-photo').files[0];
+
+            // Validation
+            if (!newName || !newEmail || !newMobile || !newNif || !newAddress) {
+                showError('Todos os campos são obrigatórios.');
+                return;
+            }
+
+            if (!validateEmail(newEmail)) {
+                showError('Email inválido.');
+                return;
+            }
+
+            if (typeof validaContribuinte === 'function' && !validaContribuinte(newNif)) {
+                showError('NIF inválido.');
+                return;
+            } else if (newNif.length !== 9) {
+                showError('NIF deve ter 9 dígitos.');
+                return;
+            }
+
+            if (newMobile.length < 9) {
+                showError('Número de telemóvel inválido.');
+                return;
+            }
+
+            // Update user data
+            const updateUser = (photoBase64) => {
+                this.currentUser.name = newName;
+                this.currentUser.email = newEmail;
+                this.currentUser.mobile = newMobile;
+                this.currentUser.nif = newNif;
+                this.currentUser.address = newAddress;
+                if (photoBase64) this.currentUser.photo = photoBase64;
+
+                // Update in users array
+                const userIndex = this.users.findIndex(u => u.username === this.currentUser.username);
+                if (userIndex !== -1) {
+                    this.users[userIndex] = this.currentUser;
+                    this.saveUsers();
+                }
+
+                // Update session
+                localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(this.currentUser));
+
+                // Refresh view
+                this.loadProfile();
+                viewMode.style.display = 'block';
+                editMode.style.display = 'none';
+                alert('Perfil atualizado com sucesso!');
+            };
+
+            // Handle photo upload
+            if (photoFile) {
+                const reader = new FileReader();
+                reader.onload = (e) => updateUser(e.target.result);
+                reader.readAsDataURL(photoFile);
+            } else {
+                updateUser(null);
+            }
+        };
     }
 
     bindEvents() {
