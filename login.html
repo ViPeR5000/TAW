@@ -9,29 +9,48 @@
 </head>
 
 <body>
-  <form action="">
-    <div class="container">
-      <h1>Login</h1>
-      <p>Please fill this form to Login.</p>
-      <hr>
-      <div id="error-message" style="color: red; font-weight: bold; margin: 10px 0; display: none;"></div>
+  <header>
+    <h1>Tecnologias de Aplicações Web</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <!-- Nav will be updated by app.js -->
+      </ul>
+    </nav>
+  </header>
 
-      <label for="username"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="username" id="username" required>
+  <main>
+    <section>
+      <form action="">
+        <div class="container">
+          <h2>Login</h2>
+          <p>Please fill this form to Login.</p>
+          <hr>
+          <div id="error-message" style="color: red; font-weight: bold; margin: 10px 0; display: none;"></div>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+          <label for="username"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-    <div class="container signin">
-      <p>Don't have an account? <a href="register.html">Sign in</a>.</p>
-    </div>
-  </form>
+          <button type="submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+
+        <div class="container signin">
+          <p>Don't have an account? <a href="register.html">Sign in</a>.</p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web. Desenvolvido por Grupo 2 Luís Moreira
+      / Carlos Pimentel / Rui Melo</p>
+  </footer>
 
   <script src="app.js"></script>
 </body>
