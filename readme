@@ -1,0 +1,29 @@
+Grupo 2
+
+Identificação dos Elementos:
+
+Carlos Pimentel [carlos.pimentel@outlook.pt]
+Rui Melo [viper5000pt@gmail.com]
+Luís Moreira [luismoreir@outlook.pt | luismoreir@gmail.com]
+
+Auto Avaliação do Grupo: 20 valores
+
+Auto Avaliação Individual:
+
+Carlos Pimentel  Valores
+Rui Melo        20 Valores
+Luís Moreira     Valores
+
+Descrição de tarefas:
+
+Carlos Pimentel		Contribuições / Apoio Estratégico / Code Review e Testes de Funcionalidades 
+Luís Moreira		Desenvolvimento e Colaboração
+Rui Melo 		    Desenvolvimento
+
+Funcionalidades extra.
+
+Validação do nif a nível.
+organização por pastas dos ficheiros.
+implementação de password forte ( 8 digitos + letras + numéros + simbulos) e verificação se a password é igual no formulario de registo.
+validação se o utilizador / email já existem
+editar perfil

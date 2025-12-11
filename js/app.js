@@ -163,7 +163,7 @@ class Auth {
         } else {
             this.users.forEach(user => {
                 const isMe = user.username === this.currentUser.username;
-                const photoHtml = user.photo ? `<img src="${user.photo}" style="width: 40px; height: 40px; border-radius: 50%;">` : 'No Photo';
+                const photoHtml = user.photo ? `<img src="${user.photo}" style="width: 40px; height: 40px; border-radius: 50%;">` : 'Sem fotografia';
 
                 html += `
                     <tr>
@@ -194,7 +194,7 @@ class Auth {
         deleteBtn.onclick = () => {
             const usernames = getSelectedUsers();
             if (usernames.length === 0) return alert('Select users first.');
-            if (!confirm(`Delete ${usernames.length} users?`)) return;
+            if (!confirm(`Apagar ${usernames.length} utilizador?`)) return;
 
             this.users = this.users.filter(u => !usernames.includes(u.username));
             this.saveUsers();
