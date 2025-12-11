@@ -35,13 +35,13 @@
           <hr>
           <div id="error-message" style="color: red; font-weight: bold; margin: 10px 0; display: none;"></div>
 
-          <label for="username"><b>Nome de Utilizador</b></label>
+          <label for="username"><b>Nome de Utilizador</b><b style="color: red"> *</b></label>
           <input type="text" placeholder="Utilizador" name="username" id="username" required>
 
-          <label for="psw"><b>Palavra-chave</b></label>
+          <label for="psw"><b>Palavra-chave</b><b style="color: red"> *</b></label>
           <input type="password" placeholder="Senha" name="psw" id="psw" required>
 
-          <label for="psw-repeat"><b>Confirme Palavra-chave</b></label>
+          <label for="psw-repeat"><b>Confirme Palavra-chave</b><b style="color: red"> *</b></label>
           <input type="password" placeholder="Repetir Senha" name="psw-repeat" id="psw-repeat" required>
 
           <label for="profilePhoto"><b>Fotografia do Perfil:</b></label>
@@ -49,22 +49,24 @@
           <p></p>
 
 
-          <label for="name" style="line-height: 80%;"><b>Nome:</b></label>
+          <label for="name" style="line-height: 80%;"><b>Nome:</b><b style="color: red"> *</b></label>
           <input type="text" placeholder="Nome Apelido" name="name" id="name" required>
 
-          <label for="email"><b>Email:</b></label>
+          <label for="email"><b>Email:</b><b style="color: red"> *</b></label>
           <input type="text" placeholder="Correio Eletrónico" name="email" id="email" required>
 
-          <label for="mobile"><b>Número de Telemovel:</b></label>
+          <label for="mobile"><b>Número de Telemovel:</b><b style="color: red"> *</b></label>
           <input type="number" placeholder="Telefone" name="mobile" id="mobile" required>
 
-          <label for="nif"><b>N.º Identificação Fiscal (9 digitos):</b></label>
+          <label for="nif"><b>N.º Identificação Fiscal (9 digitos):</b><b style="color: red"> *</b></label>
           <input type="number" placeholder="NIF" name="nif" id="nif" required>
 
-          <label for="address"><b>Morada:</b></label>
+          <label for="address"><b>Morada:</b><b style="color: red"> *</b></label>
           <input type="text" placeholder="Morada" name="address" id="address" required>
 
-          <p>Com a criação da conta aceita os nossos <a href="https://rgpd.com/pt-pt/politica-de-privacidade"
+          <br><br>
+          <p> Todos os campos assinalados com <b style="color: red"> *</b>, são de preenchimento obrigatório.</b></p>
+          <p> Com a criação da conta aceita os nossos <a href="https://rgpd.com/pt-pt/politica-de-privacidade"
               target="_blank">Termos e Privacidade</a>.</p>
           <button type="submit" class="registerbtn">Registo</button>
         </div>
