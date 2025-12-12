@@ -1,0 +1,86 @@
+#body-app main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0; 
+}
+
+#admin-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 70vh;
+    padding: 2em;
+    border: none;
+    background-color: transparent; 
+}
+
+#users-table-container {
+    width: 100%;
+    max-width: 60em;
+    background-color: white;
+    padding: 1.5em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+#users-table th, #users-table td {
+    border: 1px solid #eee;
+    padding: 0.8em;
+    text-align: left;
+    word-break: break-word; 
+}
+
+#users-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+#users-table img {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0;
+}
+
+.remove-btn {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+    background-color: #e55335;
+}
+
+#logout-btn-page {
+    width: 100%;
+    max-width: 72em;
+    margin-top: 2em; 
+    background-color: #ff6347; 
+    color: white; 
+    border: none;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+    padding: 0.8em;
+    cursor: pointer;
+    align-self: center; 
+}
+
+#logout-btn-page:hover {
+    background-color: #e55335;
+}

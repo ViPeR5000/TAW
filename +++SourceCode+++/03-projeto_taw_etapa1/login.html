@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Tecnologias de Aplicações Web</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <script defer type="module" src="js/login.js"></script>
+    <script defer type="module" src="js/admin.js"></script>
+</head>
+
+<body id="body-app"> 
+
+    <header>
+        <h1>Tecnologias de Aplicações Web</h1>
+        
+        <nav id="menu">
+            <ul>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="login-registo-area">        
+            <form id="auth-form">
+                <h3>Login</h3>
+                
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                
+                <div id="register-fields" style="display: none;">
+                    <label for="reg-photo">Foto de Perfil:</label>
+                    <input type="file" id="reg-photo" accept="image/*">
+
+                    <label for="reg-name">Nome:</label>
+                    <input type="text" id="reg-name">
+                    
+                    <label for="reg-email">Email:</label>
+                    <input type="email" id="reg-email">
+
+                    <label for="reg-phone">Telemóvel:</label>
+                    <input type="tel" id="reg-phone" pattern="[0-9]{9}" title="Telemóvel deve ter 9 dígitos (apenas números)">
+
+                    <label for="reg-nif">NIF (9 dígitos):</label>
+                    <input type="text" id="reg-nif" pattern="\d{9}" title="NIF deve ter 9 dígitos">
+                    
+                    <label for="reg-address">Morada:</label>
+                    <input type="text" id="reg-address">
+                </div>
+                
+                <button type="submit" id="submit-auth-btn">Entrar</button>
+                <button id="toggle-register-btn">Mudar para Registo</button>
+            </form>
+        </section>
+
+        <section id="conta-area" style="display: none;">
+            <section id="user-profile-info" class="profile-container"> 
+        
+                <img id="profile-photo" src="" alt="Foto de Perfil" class="profile-photo"> 
+        
+                <h3 id="profile-greeting">Olá, Nome do Utilizador</h3>
+            
+                <section class="profile-details-grid">
+                    <p><strong>Nome:</strong></p><p id="profile-name">nome_completo_placeholder</p>
+                    <p><strong>Email:</strong></p><p id="profile-email">email_placeholder</p>
+                    <p><strong>Telemóvel:</strong></p><p id="profile-phone">telemovel_placeholder</p>
+
+                    <p><strong>Username:</strong></p><p id="profile-username">username_placeholder</p>
+                    <p><strong>NIF:</strong></p><p id="profile-nif">nif_placeholder</p>
+                    <p><strong>Morada:</strong></p><p id="profile-address">morada_placeholder</p>
+                </section>
+
+                <button id="logout-btn-page" class="auth-button" type="button">Sair da Conta (Logout)</button> 
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; C-ACADEMY 2025: Projeto Módulo de Tecnologias de Aplicações Web.</p>
+    </footer>
+
+</body>
+</html>        

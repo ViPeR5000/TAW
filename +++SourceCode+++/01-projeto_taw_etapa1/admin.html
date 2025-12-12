@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css"> 
+    
+    <script defer type="module" src="js/utils.js"></script> 
+    <script defer type="module" src="js/admin.js"></script>
+    
+</head>
+
+<body id="body-app"> 
+
+    <header>
+        <h1>Tecnologias de Aplicações Web</h1>
+        
+        <nav id="menu">
+            <ul>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="admin-area">
+
+            <h3>Lista de Utilizadores Registados</h3>
+
+            <section id="users-table-container">
+                <p id="loading-message">A carregar lista de utilizadores...</p>
+            </section>
+
+            <button id="logout-btn-page" class="auth-button" type="button">Sair da Conta (Logout)</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; C-ACADEMY 2025: Projeto Módulo de Tecnologias de Aplicações Web.</p>
+    </footer>
+
+</body>
+</html>

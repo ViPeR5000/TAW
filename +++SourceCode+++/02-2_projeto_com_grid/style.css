@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+body {
+    font-size: 100%; 
+    font-family: Arial, sans-serif; 
+    background-color: #f8f8f8; 
+    color: #333; 
+    line-height: 1.6; 
+}
+
+header {
+    background-color: black; 
+    padding: 1.5em 0; 
+    text-align: center;
+}
+
+
+h1 {
+    color: rgb(90, 195, 178); 
+    font-size: 2.5rem; 
+    text-align: center;
+    margin-bottom: 0.5em; 
+}
+
+h2, h3 {
+    color: rgb(90, 195, 178); 
+    margin-bottom: 0.625em;
+}
+
+nav ul {
+    list-style: none;
+    justify-content: center;
+    text-align: center;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 0.8em; 
+}
+
+nav a {
+    color: white;
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 1.1rem; 
+}
+
+nav a:hover {
+    color: rgb(90, 195, 178);
+    text-decoration: underline;
+}
+
+main {
+    padding: 1.5em;
+    display: grid;
+    grid-template-areas: 
+        "area1 area2"
+        "area3 area3";
+    gap: 1.5em;
+}
+
+main section:nth-child(1) { grid-area: area1; }
+main section:nth-child(2) { grid-area: area2; }
+main section:nth-child(3) { grid-area: area3; }
+
+section {
+    background-color: white;
+    padding: 1em;       
+        border: 0.0625em solid #ccc; 
+    border-radius: 0.3125em; 
+}
+
+img, video {
+    max-width: 100%; 
+    height: auto;
+    display: block; 
+    margin: 1em auto;
+}
+
+td img {
+    width: 3.5rem;
+    height: auto;
+    display: block;
+    margin: 0.2em auto;
+}
+
+
+table {
+    width: 100%; 
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+th, td {
+    border: 0.0625em solid #ddd;
+    padding: 0.5em;
+    text-align: left;
+    font-size: 0.9em; 
+}
+
+@media screen and (max-width: 45em) {
+    main {
+        grid-template-areas: 
+            "area1"
+            "area2"
+            "area3";
+        grid-template-columns: 1fr; 
+    }
+    
+    nav ul {
+        flex-wrap: wrap; 
+        justify-content: space-around;
+    }
+}
+
+footer {
+    background-color: #333;
+    color: #bbb;
+    text-align: center;
+    padding: 1em; 
+}
