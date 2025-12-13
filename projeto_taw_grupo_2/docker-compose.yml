@@ -4,7 +4,7 @@ services:
     container_name: express-app
     # Mapeia a porta 3000 do container para a porta 3000 da sua máquina
     ports:
-      - "3000:3001"
+      - "3001:3000"
     volumes:
       # Monta o código local para que as alterações se reflitam no container (Live Reload)
       - .:/usr/src/app
