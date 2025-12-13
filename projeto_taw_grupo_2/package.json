@@ -1,7 +1,6 @@
 {
   "name": "projeto_taw_grupo_2",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -13,5 +12,7 @@
   "dependencies": {
     "express": "^5.2.1",
     "mongoose": "^9.0.1"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

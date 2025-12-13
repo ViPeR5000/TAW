@@ -20,7 +20,7 @@ COPY . .
 
 # Expor a porta que a API vai usar
 
-EXPOSE 3000
+EXPOSE 3001
 
 # Comando para iniciar a API
 
