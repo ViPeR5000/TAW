@@ -20,3 +20,4 @@ mongoose.connect(DB_URI) // Inicia a tentativa de conexão assíncrona à base d
     .catch(err => { // Esta função é executada apenas se a ligação ao MongoDB falhar
         console.error('ERRO: Falha na ligação ao MongoDB:', err.message);
     });
+    
