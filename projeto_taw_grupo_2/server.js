@@ -2,7 +2,7 @@ const express = require('express'); // Importa o Express (padrão da indústria 
 const mongoose = require('mongoose'); // Importa o Mongoose para interação com a base de dados
  
 const app = express(); // Cria uma instância da aplicação. Será utilizado para definir as rotas, configurações e middleware do servidor
-const PORT = process.env.PORT || 3000; // Define o número da porta de rede onde o servidor web irá estar à escuta de pedidos
+const PORT = process.env.PORT || 3001; // Define o número da porta de rede onde o servidor web irá estar à escuta de pedidos
  
 // Middlewares
 app.use(express.json()); // Configura o Express para processar pedidos que chegam ao servidor com o header Content-Type: application/json.
