@@ -1,10 +1,10 @@
 #correr so 1 x
-npm install cors bcrypt helmet morgan jsonwebtoken
+#npm install cors bcrypt helmet morgan jsonwebtoken
 #npm init -y
 #npm install express mongoose
 #edit files
-docker compose down --volumes // Remove todos os containers, redes e volumes definidos no docker-compose.yml que foram criados na execução anterior
-docker compose build --no-cache // Reconstrói as imagens de todos os serviços definidos
+#docker compose down --volumes // Remove todos os containers, redes e volumes definidos no docker-compose.yml que foram criados na execução anterior
+#docker compose build --no-cache // Reconstrói as imagens de todos os serviços definidos
 docker compose up --build
 
 #[+] Running 3/3

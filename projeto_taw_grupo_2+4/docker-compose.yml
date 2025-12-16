@@ -1,7 +1,7 @@
 services:
   app:
     build: .
-    container_name: express-app
+    container_name: express-app-4
     # Mapeia a porta 3000 do container para a porta 3000 da sua máquina
     ports:
       - "3001:3001"
@@ -20,7 +20,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: mongodb-db-etapa2
+    container_name: mongodb-db-etapa2-4
     ports:
       # Opcional, permite aceder ao Mongo a partir do host (ex: com Mongo Compass)
       - "27017:27017" 
