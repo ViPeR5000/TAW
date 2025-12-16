@@ -1,3 +1,4 @@
+#por uma questao de organizacao e de nao criar mais ruido adicionei numeros ao nome dos container para não terem probelmas a destruir-lo
 services:
   app:
     build: .

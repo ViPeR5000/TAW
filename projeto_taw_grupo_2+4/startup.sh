@@ -5,6 +5,7 @@
 #edit files
 #docker compose down --volumes // Remove todos os containers, redes e volumes definidos no docker-compose.yml que foram criados na execução anterior
 #docker compose build --no-cache // Reconstrói as imagens de todos os serviços definidos
+#por uma questao de organizacao e de nao criar mais ruido adicionei numeros ao nome dos container para não terem probelmas a destruir-lo
 docker compose up --build
 
 #[+] Running 3/3
