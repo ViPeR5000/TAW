@@ -2,7 +2,7 @@
 services:
   app:
     build: .
-    container_name: express-app-4
+    container_name: express-app-5
     # Mapeia a porta 3000 do container para a porta 3000 da sua máquina
     ports:
       - "3001:3001"

@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 3001; // Define o número da porta de rede onde
 app.use(express.json()); // Configura o Express para processar pedidos que chegam ao servidor com o header Content-Type: application/json.
 
 const authRoutes = require('./routes/authRoutes'); // Importar as rotas
+const userRoutes = require('./routes/userRoutes'); // Importar as rotas de utilizadores
+
 app.use('/api/auth', authRoutes); // Usar as rotas da API sob o prefixo /api/auth
+app.use('/api/users', userRoutes); // Usar as rotas de utilizadores sob o prefixo /api/users
 
 
 // Rota de teste simples
