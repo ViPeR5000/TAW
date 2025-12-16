@@ -21,7 +21,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: mongodb-db-etapa2-4
+    container_name: mongodb-db-etapa2-5
     ports:
       # Opcional, permite aceder ao Mongo a partir do host (ex: com Mongo Compass)
       - "27017:27017" 
