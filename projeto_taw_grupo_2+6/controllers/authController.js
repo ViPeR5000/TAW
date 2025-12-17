@@ -1,6 +1,6 @@
 const User = require('../models/Users'); // Importa o modelo Mongoose
 const jwt = require('jsonwebtoken');     // Para criar tokens de sessão
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = 'a_vossa_chave_secreta_muito_segura';
 const TOKEN_EXPIRATION = '1h';
 const bcrypt = require('bcrypt');
 //const DOMPurify = require('dompurify');
