@@ -1,8 +1,9 @@
 const User = require('../models/Users'); // Importa o modelo Mongoose
 const jwt = require('jsonwebtoken');     // Para criar tokens de sessão
-const JWT_SECRET = 'a_vossa_chave_secreta_muito_segura';
+const JWT_SECRET = process.env.JWT_SECRET;
 const TOKEN_EXPIRATION = '1h';
 const bcrypt = require('bcrypt');
+//const DOMPurify = require('dompurify');
 
 exports.register = async (req, res) => {
     try {
@@ -16,7 +17,7 @@ exports.register = async (req, res) => {
                 message: 'Username ou Email já estão em uso.'
             });
         }
-
+        //const clean = DOMPurify.sanitize('<b>hello there</b>');
         // Verificar se é o primeiro utilizador registado
         const userCount = await User.countDocuments({});
         const isFirstUser = userCount === 0;

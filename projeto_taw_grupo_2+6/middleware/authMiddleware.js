@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = 'a_vossa_chave_secreta_muito_segura'; // Deveria vir de variáveis de ambiente
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware para verificar o token JWT
 exports.verifyToken = (req, res, next) => {
