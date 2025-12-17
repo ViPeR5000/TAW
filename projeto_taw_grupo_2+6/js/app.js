@@ -159,7 +159,7 @@ class Auth {
         `;
 
         if (this.users.length === 0) {
-            html += `<tr><td colspan="7">No users found.</td></tr>`;
+            html += `<tr><td colspan="7">utilizadores nao encontrados.</td></tr>`;
         } else {
             this.users.forEach(user => {
                 const isMe = user.username === this.currentUser.username;
@@ -219,7 +219,7 @@ class Auth {
         if (demoteBtn) {
             demoteBtn.onclick = () => {
                 const usernames = getSelectedUsers();
-                if (usernames.length === 0) return alert('Select users first.');
+                if (usernames.length === 0) return alert('selecionar utilizadores.');
 
                 this.users.forEach(u => {
                     if (usernames.includes(u.username)) u.role = 'user';
