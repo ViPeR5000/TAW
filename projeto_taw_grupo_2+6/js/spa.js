@@ -1,3 +1,4 @@
+
 // Determinar URL da API com base no ambiente (http vs file)
 const API_BASE_URL = (window.location.protocol === 'file:')
     ? 'http://localhost:3001/api'

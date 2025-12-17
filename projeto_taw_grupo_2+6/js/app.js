@@ -193,7 +193,7 @@ class Auth {
         // Associar Evento de Eliminar
         deleteBtn.onclick = () => {
             const usernames = getSelectedUsers();
-            if (usernames.length === 0) return alert('Select users first.');
+            if (usernames.length === 0) return alert('slecionar utilizadores .');
             if (!confirm(`Apagar ${usernames.length} utilizador?`)) return;
 
             this.users = this.users.filter(u => !usernames.includes(u.username));
@@ -205,7 +205,7 @@ class Auth {
         if (promoteBtn) {
             promoteBtn.onclick = () => {
                 const usernames = getSelectedUsers();
-                if (usernames.length === 0) return alert('Select users first.');
+                if (usernames.length === 0) return alert('slecionar utilizadores primeiro.');
 
                 this.users.forEach(u => {
                     if (usernames.includes(u.username)) u.role = 'admin';

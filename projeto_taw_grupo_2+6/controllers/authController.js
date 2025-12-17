@@ -2,6 +2,7 @@ const User = require('../models/Users'); // Importa o modelo Mongoose
 const jwt = require('jsonwebtoken');     // Para criar tokens de sessão
 const JWT_SECRET = 'a_vossa_chave_secreta_muito_segura';
 const TOKEN_EXPIRATION = '1h';
+const bcrypt = require('bcrypt');
 
 exports.register = async (req, res) => {
     try {
@@ -16,13 +17,6 @@ exports.register = async (req, res) => {
             });
         }
 
-        // Criar novo utilizador
-        // NOTA: A password deve ser hashada antes de guardar em produção (bcrypt), 
-        // mas seguindo o exemplo do login fornecido, manteremos simples por enquanto ou usaremos o bcrypt se já estiver importado no server.js (o server.js tem bcrypt, mas o controller não)
-        // O user pediu para implementar login com password simples no request anterior. Vou manter simples aqui também para consistência, mas o ideal era bcrypt.
-        // Contudo, server.js tem `const bcrypt = require('bcrypt');`, talvez deva usar? 
-        // O código de login fornecido pelo user fazia `if(password != user.password)`, comparação direta. Então vou guardar em plain text para compatibilidade com o login fornecido.
-
         // Verificar se é o primeiro utilizador registado
         const userCount = await User.countDocuments({});
         const isFirstUser = userCount === 0;
@@ -30,10 +24,12 @@ exports.register = async (req, res) => {
         console.log(`[Registo] Contagem de utilizadores existentes: ${userCount}`);
         console.log(`[Registo] Is First User? ${isFirstUser}`);
 
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
         const newUser = new User({
             username,
             email,
-            password, // Plain text conforme lógica de login atual
+            password: hashedPassword, // Plain hash com bcrypt
             nome,
             nif,
             morada,
@@ -80,13 +76,26 @@ exports.login = async (req, res) => {
             });
         }
 
-        if (password != user.password) {
+        //        if (password != user.password) {
+        //          return res.status(401).json({
+        //            success: false,
+        //          message: 'Credenciais inválidas.'
+        //    });
+        //  }
+        // verficar password usando brcrypt
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        console.log(`[Login] Verificando password para ${identifier}: ${isPasswordValid}`);
+        console.log(`[Login] Password do utilizador: ${user.password}`);
+
+        if (!isPasswordValid) {
+
             return res.status(401).json({
                 success: false,
                 message: 'Credenciais inválidas.'
             });
-        }
 
+        }
         // Geração do JWT (JSON Web Tokens)
         // O payload deve conter a informação mínima necessária para identificar o utilizador e autorização
         const payload = {
