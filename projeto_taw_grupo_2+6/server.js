@@ -10,7 +10,8 @@ const morgan = require('morgan');   // Para logging dos pedidos HTTP do cliente
 const PORT = process.env.PORT || 3001; // Define o número da porta de rede onde o servidor web irá estar à escuta de pedidos
 
 // Middlewares
-app.use(express.json()); // Configura o Express para processar pedidos que chegam ao servidor com o header Content-Type: application/json.
+app.use(express.json({ limit: '50mb' })); // Configura o Express para processar pedidos que chegam ao servidor com o header Content-Type: application/json. Aumentado limite para 50mb para suportar imagens base64.
+app.use(express.static('.')); // Serve ficheiros estáticos (HTML, CSS, JS, Imagens) da pasta raiz
 
 const authRoutes = require('./routes/authRoutes'); // Importar as rotas
 const userRoutes = require('./routes/userRoutes'); // Importar as rotas de utilizadores
@@ -27,16 +28,16 @@ app.get('/', (req, res) => { // Ficará à escuta de pedidos HTTP que usam o mé
 app.use(cors());                   // Para simplificar, vamos permitir todas as origens
 app.use(morgan('tiny'));   // Existem outros presets que podem usar: dev, combined, common, ou short
 app.use(helmet());                // Define cabeçalhos de resposta HTTP relacionados com a segurança
-// Define a string de conexão a partir da variável de ambiente (MONGO_URI)
+// Define a string de ligacao a partir da variável de ambiente (MONGO_URI)
 const DB_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/projeto-db';
 
-mongoose.connect(DB_URI) // Inicia a tentativa de conexão assíncrona à base de dados MongoDB
-    .then(() => { // Esta função é executada apenas se a ligação à base de dados for bem-sucedida
+mongoose.connect(DB_URI) // Inicia a tentativa de ligacao assíncrona a bd MongoDB
+    .then(() => { // Esta função é executada apenas se a ligação bd for bem-sucedida
         console.log('Ligação bem-sucedida ao MongoDB!');
         app.listen(PORT, () => { // Servidor iniciado
             console.log(`O Servidor Express encontra-se em execução na porta ${PORT}`);
         });
     })
-    .catch(err => { // Esta função é executada apenas se a ligação ao MongoDB falhar
+    .catch(err => { 
         console.error('ERRO: Falha na ligação ao MongoDB:', err.message);
     });

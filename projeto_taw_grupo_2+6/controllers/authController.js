@@ -23,6 +23,13 @@ exports.register = async (req, res) => {
         // Contudo, server.js tem `const bcrypt = require('bcrypt');`, talvez deva usar? 
         // O código de login fornecido pelo user fazia `if(password != user.password)`, comparação direta. Então vou guardar em plain text para compatibilidade com o login fornecido.
 
+        // Verificar se é o primeiro utilizador registado
+        const userCount = await User.countDocuments({});
+        const isFirstUser = userCount === 0;
+
+        console.log(`[Registo] Contagem de utilizadores existentes: ${userCount}`);
+        console.log(`[Registo] Is First User? ${isFirstUser}`);
+
         const newUser = new User({
             username,
             email,
@@ -31,10 +38,12 @@ exports.register = async (req, res) => {
             nif,
             morada,
             telemovel,
-            fotografia
+            fotografia,
+            isAdmin: isFirstUser // Se for o primeiro, é admin
         });
 
         await newUser.save();
+        console.log(`[Registo] Utilizador criado. isAdmin: ${newUser.isAdmin}`);
 
         res.status(201).json({
             success: true,

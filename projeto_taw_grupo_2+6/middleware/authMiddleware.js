@@ -12,7 +12,7 @@ exports.verifyToken = (req, res, next) => {
         });
     }
 
-    // O token geralmente vem no formato "Bearer <token>", então removemos o "Bearer "
+    // O token vem no formato "Bearer <token>", então removemos o "Bearer "
     const tokenPart = token.startsWith('Bearer ') ? token.slice(7, token.length) : token;
 
     jwt.verify(tokenPart, JWT_SECRET, (err, decoded) => {
@@ -23,7 +23,7 @@ exports.verifyToken = (req, res, next) => {
             });
         }
 
-        // Se verificado com sucesso, guarda o ID do utilizador no request para uso posterior
+        // Se verificado com sucesso, guarda o ID do utilizador no request para uso 
         req.userId = decoded.id;
         req.user = decoded; // Guardar todo o payload se necessário (ex: isAdmin)
         next();
