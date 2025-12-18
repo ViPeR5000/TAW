@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nome do container definido no docker-compose.yml
-CONTAINER_NAME="mongodb-db-etapa2-6"
+CONTAINER_NAME="mongodb-db-etapa2-7"
 DB_NAME="projeto-db"
 
 echo "A listar todos os utilizadores da base de dados '$DB_NAME'..."

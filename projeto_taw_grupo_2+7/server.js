@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express'); // Importa o Express (padrão da indústria em Node.js para criar servidores web, rotas API (REST) e middleware)
 const mongoose = require('mongoose'); // Importa o Mongoose para interação com a base de dados
 

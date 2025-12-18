@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'); // Importa o Mongoose, a biblioteca ODM para o MongoDB.
 
-const UserSchema = new mongoose.Schema({ // Cria um novo Esquema Mongoose, definindo a estrutura dos documentos de utilizador
+const UserSchema = new mongoose.Schema({ // Cria um novo Esquema , definindo a estrutura dos documentos de utilizador
     username: {
         type: String,
         required: true,  // É um campo obrigatório para criar um novo utilizador
