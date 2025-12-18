@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 3001; // Define o número da porta de rede onde
 // Middlewares
 app.use(express.json({ limit: '50mb' })); // Configura o Express para processar pedidos que chegam ao servidor com o header Content-Type: application/json. Aumentado limite para 50mb para suportar imagens base64.
 app.use(express.static('.')); // Serve ficheiros estáticos (HTML, CSS, JS, Imagens) da pasta raiz
+const { globalLimiter } = require('./middleware/rateLimiter');
+app.use(globalLimiter); // Apply global rate limiter to all requests
 
 const authRoutes = require('./routes/authRoutes'); // Importar as rotas
 const userRoutes = require('./routes/userRoutes'); // Importar as rotas de utilizadores
