@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Tecnologias de Aplicações Web (SPA)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* CSS SPA para esconder/mostrar secções */
+        .spa-view {
+            display: none;
+        }
+
+        .active-view {
+            display: block;
+        }
+
+        /* Centralizar forms como nas páginas originais */
+        #login-view.active-view,
+        #register-view.active-view,
+        #profile-view.active-view {
+            display: flex;
+            justify-content: center;
+        }
+
+        #login-view,
+        #register-view,
+        #profile-view {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Tecnologias de Aplicações Web</h1>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showView('home-view')">Início</a></li>
+                <li id="nav-login"><a href="#" onclick="showView('login-view')">A minha conta</a></li>
+                <li id="nav-profile" style="display: none;"><a href="#" onclick="showView('profile-view')">Perfil</a>
+                </li>
+                <li id="nav-logout" style="display: none;"><a href="#" onclick="logout()">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HOME VIEW -->
+        <section id="home-view" class="spa-view active-view">
+            <h2>Explorando o Desenvolvimento Web</h2>
+            <p>
+                O desenvolvimento de aplicações web modernas baseia-se na harmoniosa integração de três tecnologias
+                fundamentais: HTML para estruturar o conteúdo, CSS para estilizar e apresentar o visual, e JavaScript
+                para adicionar interatividade e comportamento dinâmico. Este projeto visa demonstrar a aplicação prática
+                destas tecnologias.
+            </p>
+
+            <h3>Vídeo de Apresentação</h3>
+            <video width="640" height="360" controls>
+                <source
+                    src="https://cloud.bitbook.pt/index.php/s/tgbBBNdDYD5Appg/download/HTML_IntroductionW3Schools_com.mp4"
+                    type="video/mp4">
+                O seu navegador não suporta a tag de vídeo.
+            </video>
+
+            <h3>Tabela de Recursos do Projeto</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Recurso</th>
+                        <th>Tipo de Ficheiro</th>
+                        <th>Utilização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="./img/logo_html.png" alt="Logo HTML" width="50"></td>
+                        <td>Hypertext Markup Language</td>
+                        <td>.html</td>
+                        <td>Permite descrever conteúdo de páginas web</td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/logo_css.png" alt="Logo CSS" width="50"></td>
+                        <td>Cascading Style Sheets</td>
+                        <td>.css</td>
+                        <td>Responsável pela apresentação e formatação dos elementos HTML</td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/logo_js.png" alt="Logo Javascript" width="50"></td>
+                        <td>Javascript</td>
+                        <td>.js</td>
+                        <td>Permite adicionar comportamento no cliente (browser)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- LOGIN VIEW -->
+        <section id="login-view" class="spa-view">
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <div class="container">
+                    <h2>Autenticação</h2>
+                    <p>Por favor, preencha o formulário para criar conta.</p>
+                    <hr>
+                    <div id="login-error-message" style="color: red; font-weight: bold; margin: 10px 0; display: none;">
+                    </div>
+
+                    <label for="username"><b>Nome de Utilizador</b></label>
+                    <input type="text" placeholder="Utilizador" name="username" id="login-username" required>
+
+                    <label for="psw"><b>Palavra-chave</b></label>
+                    <input type="password" placeholder="Senha" name="psw" id="login-psw" required>
+
+                    <button type="submit">Entrar</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Selecione para lembrar
+                    </label>
+                </div>
+
+                <div class="container signin">
+                    <p>Não tem conta? <a href="#" onclick="showView('register-view')">Registe-se</a>.</p>
+                </div>
+            </form>
+        </section>
+
+        <!-- REGISTER VIEW -->
+        <section id="register-view" class="spa-view">
+            <form id="register-form" onsubmit="handleRegister(event)">
+                <div class="container">
+                    <h2>Criar novo utilizador</h2>
+                    <p>Por favor preencha o formulário para cria conta.</p>
+                    <hr>
+                    <div id="register-error-message"
+                        style="color: red; font-weight: bold; margin: 10px 0; display: none;"></div>
+
+                    <label for="reg-username"><b>Nome de Utilizador</b><b style="color: red"> *</b></label>
+                    <input type="text" placeholder="Utilizador" name="username" id="reg-username" required>
+
+                    <label for="reg-psw"><b>Palavra-chave</b><b style="color: red"> *</b></label>
+                    <input type="password" placeholder="Senha" name="psw" id="reg-psw" required>
+
+                    <label for="reg-psw-repeat"><b>Confirme Palavra-chave</b><b style="color: red"> *</b></label>
+                    <input type="password" placeholder="Repetir Senha" name="psw-repeat" id="reg-psw-repeat" required>
+
+                    <label for="reg-profilePhoto"><b>Fotografia do Perfil:</b></label>
+                    <input type="file" id="reg-profilePhoto" name="profilePhoto" accept="image/*">
+                    <p></p>
+
+                    <label for="reg-name" style="line-height: 80%;"><b>Nome:</b><b style="color: red"> *</b></label>
+                    <input type="text" placeholder="Nome Apelido" name="name" id="reg-name" required>
+
+                    <label for="reg-email"><b>Email:</b><b style="color: red"> *</b></label>
+                    <input type="text" placeholder="Correio Eletrónico" name="email" id="reg-email" required>
+
+                    <label for="reg-mobile"><b>Número de Telemovel:</b><b style="color: red"> *</b></label>
+                    <input type="number" placeholder="Telefone" name="mobile" id="reg-mobile" required>
+
+                    <label for="reg-nif"><b>N.º Identificação Fiscal (9 digitos):</b><b style="color: red">
+                            *</b></label>
+                    <input type="number" placeholder="NIF" name="nif" id="reg-nif" required>
+
+                    <label for="reg-address"><b>Morada:</b><b style="color: red"> *</b></label>
+                    <input type="text" placeholder="Morada" name="address" id="reg-address" required>
+
+                    <br><br>
+                    <p> Todos os campos assinalados com <b style="color: red"> *</b>, são de preenchimento
+                        obrigatório.</b></p>
+                    <p> Com a criação da conta aceita os nossos <a href="https://rgpd.com/pt-pt/politica-de-privacidade"
+                            target="_blank">Termos e Privacidade</a>.</p>
+                    <button type="submit" class="registerbtn">Registo</button>
+                </div>
+
+                <div class="container signin">
+                    <p>Já tem uma conta? <a href="#" onclick="showView('login-view')">Entrar</a>.</p>
+                </div>
+            </form>
+        </section>
+
+        <!-- PROFILE VIEW -->
+        <section id="profile-view" class="spa-view">
+            <div style="width: 100%; max-width: 800px;">
+                <h2 style="text-align: center;">O Meu Perfil</h2>
+
+                <div id="profile-view-mode" class="container">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img id="profile-display-photo" src="" alt="Foto de Perfil"
+                            style="max-width: 150px; border-radius: 50%; display: none;">
+                        <p id="no-photo-text" style="display: none;">Sem fotografia</p>
+                    </div>
+                    <hr>
+
+                    <p><strong>Utilizador:</strong> <span id="profile-username"></span></p>
+                    <p><strong>Nome:</strong> <span id="profile-name"></span></p>
+                    <p><strong>Correio Eletrónico:</strong> <span id="profile-email"></span></p>
+                    <p><strong>Telemóvel:</strong> <span id="profile-mobile"></span></p>
+                    <p><strong>NIF:</strong> <span id="profile-nif"></span></p>
+                    <p><strong>Morada:</strong> <span id="profile-address"></span></p>
+
+                    <!-- Em SPA simples, talvez não implementemos edição completa agora, mas deixamos a estrutura -->
+                    <button id="edit-profile-btn"
+                        style="margin-top: 20px; background-color: #4CAF50; display:none;">Editar
+                        Perfil</button>
+                    <p><i></i></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN VIEW -->
+        <section id="admin-view" class="spa-view">
+            <div style="width: 100%; max-width: 1000px;">
+                <h2>Administração de Utilizadores</h2>
+                <div id="admin-error-message" style="color: red; display: none;"></div>
+
+                <div class="admin-toolbar" style="margin-bottom: 20px;">
+                    <button id="delete-selected-btn" class="action-btn"
+                        style="background-color: #f44336; display: none;">Apagar Selecionados</button>
+                    <!-- Funcionalidades do admin.html original -->
+                    <button id="promote-selected-btn"
+                        style="background-color: #4CAF50; padding: 10px 20px; color: white; border: none; cursor: pointer; display: none; margin-left: 10px;"
+                        onclick="alert('Funcionalidade de promover a Admin ainda não implementada no servidor.')">Promover
+                        a Admin</button>
+
+                    <button id="demote-selected-btn"
+                        style="background-color: #ff9800; padding: 10px 20px; color: white; border: none; cursor: pointer; display: none; margin-left: 10px;"
+                        onclick="alert('Funcionalidade de remover Admin ainda não implementada no servidor.')">Remover
+                        Admin</button>
+                </div>
+
+                <div id="admin-container" style="overflow-x: auto;">
+                    <!-- A tabela será injetada aqui pelo JS -->
+                    <p>A carregar utilizadores...</p>
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© C-ACADEMY 2025 Projeto Módulo de Tecnologias de Aplicações Web. Desenvolvido por Grupo 2 Luís Moreira
+            / Carlos Pimentel / Rui Melo</p>
+    </footer>
+
+    <script src="js/nif-pt.js"></script>
+
+    <script src="js/spa.js"></script>
+</body>
+
+</html>
