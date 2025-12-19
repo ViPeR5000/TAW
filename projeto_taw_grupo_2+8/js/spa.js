@@ -416,35 +416,27 @@ async function handleRegister(event) {
         return;
     }
 
-    //  foto
+    // FormData para envio de ficheiros
+    const formData = new FormData();
+    formData.append('username', document.getElementById('reg-username').value);
+    formData.append('password', psw);
+    formData.append('nome', document.getElementById('reg-name').value);
+    formData.append('email', document.getElementById('reg-email').value);
+    formData.append('telemovel', document.getElementById('reg-mobile').value);
+    formData.append('nif', document.getElementById('reg-nif').value);
+    formData.append('morada', document.getElementById('reg-address').value);
+
+    // Foto
     const photoFile = document.getElementById('reg-profilePhoto').files[0];
-    let photoBase64 = '';
-
     if (photoFile) {
-        try {
-            photoBase64 = await toBase64(photoFile);
-        } catch (e) {
-            showError(errorDiv, 'Erro ao processar imagem.');
-            return;
-        }
+        formData.append('fotografia', photoFile); // 'fotografia' deve bater certo com upload.single('fotografia') no backend
     }
-
-    const userData = {
-        username: document.getElementById('reg-username').value,
-        password: psw,
-        nome: document.getElementById('reg-name').value,
-        email: document.getElementById('reg-email').value,
-        telemovel: document.getElementById('reg-mobile').value,
-        nif: document.getElementById('reg-nif').value,
-        morada: document.getElementById('reg-address').value,
-        fotografia: photoBase64
-    };
 
     try {
         const response = await fetch(`${API_BASE_URL}/auth/register`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData)
+            // headers: { 'Content-Type': 'multipart/form-data' }, // NÃO adicionar Content-Type manualmente com FormData, o browser faz isso e adiciona o boundary correto!
+            body: formData
         });
 
         if (response.ok) {

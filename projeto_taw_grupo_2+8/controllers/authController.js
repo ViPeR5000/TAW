@@ -7,7 +7,13 @@ const bcrypt = require('bcrypt');
 
 exports.register = async (req, res) => {
     try {
-        const { username, email, password, nome, nif, morada, telemovel, fotografia } = req.body;
+        const { username, email, password, nome, nif, morada, telemovel } = req.body;
+        let fotografia = req.body.fotografia;
+
+        if (req.file) {
+            // Store as absolute path relative to server root (e.g., /uploads/filename.jpg)
+            fotografia = '/' + req.file.path.replace(/\\/g, "/");
+        }
 
         // Verificar se o utilizador já existe
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -30,7 +36,7 @@ exports.register = async (req, res) => {
         const newUser = new User({
             username,
             email,
-            password: hashedPassword, // Plain hash com bcrypt
+            password: hashedPassword, //  hash com bcrypt
             nome,
             nif,
             morada,
