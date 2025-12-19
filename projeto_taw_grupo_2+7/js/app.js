@@ -1,4 +1,4 @@
-/**
+/*
  * Lógica para Registo, Login e Gestão de Sessões
  */
 

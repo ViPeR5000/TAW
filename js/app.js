@@ -592,16 +592,16 @@ class Auth {
                     const nif = form.nif.value;
                     if (typeof validaContribuinte === 'function') {
                         if (!validaContribuinte(nif)) {
-                            showError("Invalid NIF.");
+                            showError("Invalido NIF.");
                             return;
                         }
                     } else if (nif.length !== 9) {
-                        showError("NIF must have 9 digits.");
+                        showError("NIF tem que ter 9 digitos1.");
                         return;
                     }
 
                     if (!validateEmail(form.email.value)) {
-                        showError("Invalid Email.");
+                        showError("Invalido Email.");
                         return;
                     }
 
