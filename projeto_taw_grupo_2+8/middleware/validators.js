@@ -13,8 +13,8 @@ const sanitize = (value) => {
 exports.registerValidation = [
     body('username')
         .trim()
-        .notEmpty().withMessage('Username é obrigatório')
-        .isLength({ min: 3 }).withMessage('Username deve ter pelo menos 3 caracteres')
+        .notEmpty().withMessage('Utilizador  é obrigatório')
+        .isLength({ min: 3 }).withMessage('Utilizador deve ter pelo menos 3 caracteres')
         .customSanitizer(sanitize),
     body('email')
         .trim()
@@ -22,7 +22,7 @@ exports.registerValidation = [
         .isEmail().withMessage('Email inválido')
         .normalizeEmail(),
     body('password')
-        .exists() // Checks if field exists
+        .exists() 
         .isLength({ min: 6 }).withMessage('Password deve ter pelo menos 6 caracteres'),
     body('nome')
         .trim()
@@ -45,7 +45,7 @@ exports.registerValidation = [
 exports.loginValidation = [
     body('identifier')
         .trim()
-        .notEmpty().withMessage('Username ou Email é obrigatório')
+        .notEmpty().withMessage('Utilizador ou Email é obrigatório')
         .customSanitizer(sanitize),
     body('password')
         .notEmpty().withMessage('Password é obrigatória')

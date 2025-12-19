@@ -9,7 +9,7 @@ exports.globalLimiter = rateLimit({
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     message: {
         success: false,
-        message: 'Upxxxx tenta novamente daqui a 15 minutos.'
+        message: 'Muitas tentativas de pedido, tente novamente daqui a 15 minutos.'
     }
 });
 
@@ -21,6 +21,6 @@ exports.authLimiter = rateLimit({
     legacyHeaders: false,
     message: {
         success: false,
-        message: 'muitas tabtatuvas tenta novamente após 1 minuto.'
+        message: 'Muitas tentativas de login, tente novamente após 1 minuto.'
     }
 });

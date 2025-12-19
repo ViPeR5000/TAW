@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
         if (existingUser) {
             return res.status(400).json({
                 success: false,
-                message: 'Username ou Email já estão em uso.'
+                message: 'Utilizador  ou Email já estão em uso.'
             });
         }
 
@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
         const isFirstUser = userCount === 0;
 
         console.log(`[Registo] Contagem de utilizadores existentes: ${userCount}`);
-        console.log(`[Registo] Is First User? ${isFirstUser}`);
+        console.log(`[Registo] Primeiro Utilizador? ${isFirstUser}`);
 
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -83,13 +83,7 @@ exports.login = async (req, res) => {
             });
         }
 
-        //        if (password != user.password) {
-        //          return res.status(401).json({
-        //            success: false,
-        //          message: 'Credenciais inválidas.'
-        //    });
-        //  }
-        // verficar password usando brcrypt
+
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         console.log(`[Login] Verificando password para ${identifier}: ${isPasswordValid}`);
