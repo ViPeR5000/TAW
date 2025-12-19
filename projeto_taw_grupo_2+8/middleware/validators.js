@@ -56,7 +56,7 @@ exports.validate = (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({
             success: false,
-            message: 'Erro de validação',
+            message: `Erro no campo: ${errorSummary}`,
             errors: errors.array()
         });
     }
