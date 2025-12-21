@@ -25,8 +25,13 @@ O projeto inclui as seguintes funcionalidades principais, divididas entre compon
 
  - **VM de Apoio**: Implementação de uma Máquina Virtual dedicada para suporte e testes.
 
+https://drive.google.com/drive/folders/1pm7MPKF5v4BlgmahKV3nw3REUKUwtX5f
+
+codigo
+
 - **Repositório Git Online**: Organização do projeto em fases (pastas distintas) e histórico de commits atómicos focados por funcionalidade.
 
+https://github.com/ViPeR5000/TAW/
 ### Criação de bashscripts 
 
  - **scripts**: Implementação de diversos bashsciprts para optimizar / automatizar tarefas ou ajudar na manutenção e despiste de erros
@@ -108,7 +113,9 @@ A combinação de **validação de entrada**, **limitação de taxa** e **gestã
 
 
 **Carlos Pimentel**	[carlos.pimentel@outlook.pt]
-**Luís Moreira**	[uismoreir@gmail.com]
+
+**Luís Moreira**	[luismoreir@gmail.com]
+
 **Rui Melo**		[viper5000pt@gmail.com]
 
 
