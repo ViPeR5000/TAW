@@ -11,7 +11,7 @@ Grupo 2
 ### Auto Avaliação Individual:
 - Carlos Pimentel	17 Valores
 - Rui Melo		1 Valores
-- Luís Moreira	18 Valores
+- Luís Moreira	15 Valores
 
 ### Descrição de tarefas:
 - Carlos Pimentel	Apoio Estratégico, Code follower e Testes de Funcionalidades 
