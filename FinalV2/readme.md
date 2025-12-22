@@ -24,3 +24,8 @@ Grupo 2
 - Ciação de bashscripts para optimizar / automatizar tarefas ou ajudar na manutenção e despiste de erros
 - Criação de VM de apoio para suporte e testes
 - Criação de repositório git online para organizar o projeto em fases (pastas distintas) e histórico de commits atómicos focados por funcionalidade
+
+
+### Links
+- Git https://github.com/ViPeR5000/TAW/
+- VM https://drive.google.com/drive/folders/1pm7MPKF5v4BlgmahKV3nw3REUKUwtX5f
