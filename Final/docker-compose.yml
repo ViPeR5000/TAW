@@ -2,7 +2,7 @@
 services:
   app:
     build: .
-    container_name: express-app-final
+    container_name: express-app-8
     # Mapeia a porta 3000 do container para a porta 3000 da sua máquina
     ports:
       - "3001:3001"
@@ -16,12 +16,12 @@ services:
     environment:
       # Variável que o Express vai ler para se ligar à base de dados
       # O host deve ser 'mongodb' (ou seja, o nome do serviço)
-      MONGO_URI: mongodb://mongodb:27017/projeto-db 
+      MONGO_URI: mongodb://mongodb:27017/projeto-db-8
       PORT: 3001
 
   mongodb:
     image: mongo:latest
-    container_name: mongodb-db-etapa2-final
+    container_name: mongodb-db-etapa2-8
     ports:
       # Opcional, permite aceder ao Mongo a partir do host (ex: com Mongo Compass)
       - "27017:27017" 
